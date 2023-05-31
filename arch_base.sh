@@ -28,6 +28,7 @@ sudo pacman -S --noconfirm --needed neovim \
 	fd \
 	exa \
 	kitty \
+	polybar \
 	ripgrep \
 	neofetch \
 	telegram-desktop
@@ -63,14 +64,11 @@ yay --answerdiff None --answerclean None -- removemake -S autotiling
 # powerfull for directory navigation
 
 # Install nerd-fonts
-mkdir ~/__tmp__
-cd ~/__tmp__
+cd ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/FiraCode.zip
 unzip FiraCode.zip
-mv __tmp__/*.ttf ~/.local/share/fonts/
 rm FiraCode.zip
 cd ~/
-rm -rf ~/__tmp__
 fc-cache -fv
 
 # ======= CARGO INSTALL ======= #
