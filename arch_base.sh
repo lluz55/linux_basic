@@ -5,48 +5,82 @@ mkdir -v ~/.config/
 mkdir -pv ~/.local/share/
 mkdir -pv ~/.local/share/fonts/
 
-# install git
-sudo pacman -S git --noconfirm --needed
-
 cd ~/
 
-git clone https://github.com/erikdubois/arcolinux-nemesis.git
-sh ~/arcolinux-nemesis/arch/get-the-keys-and-repos.sh
+#git clone https://github.com/erikdubois/arcolinux-nemesis.git
+#sh ~/arcolinux-nemesis/arch/get-the-keys-and-repos.sh
 
-sudo pacman -S --noconfirm --needed neovim
-sudo pacman -S --noconfirm --needed yay
-sudo pacman -S --noconfirm --needed exa
-sudo pacman -S --noconfirm --needed fish
-sudo pacman -S --noconfirm --needed kitty
-sudo pacman -S --noconfirm --needed telegram-desktop
+sudo pacman -S --noconfirm --needed git \
+	base-devel \
+	unzip
+
+sudo pacman -S --noconfirm --needed neovim \
+	fish \
+	wget \
+	rust \
+	cargo \
+	rust-src \
+	autotiling \
+	fontconfig
+
+sleep 1
+
+sudo pacman -S --noconfirm --needed neovim \
+	fd \
+	exa \
+	kitty \
+	ripgrep \
+	neofetch \
+	telegram-desktop
+
+sleep 1
+
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+cd ~/
+
+sleep 1
+
+yay -Sy autotiling
 # (de)compression tool
 # sudo pacman -S --noconfirm --needed ouch
 
 # For use with i3-wm
 # sudo pacman -S --noconfirm --needed i3-wm picom autotiling feh
-sudo pacman -S --noconfirm --needed starship
-sudo pacman -S --noconfirm --needed fd
-sudo pacman -S --noconfirm --needed ripgrep
-sudo pacman -S --noconfirm --needed firefox
-sudo pacman -S --noconfirm --needed base-devel
+# sudo pacman -S --noconfirm --needed starship
 # customizable lockscreen
 # sudo pacman -S --noconfirm --needed gtklock
-# screenshot
-sudo pacman -S --noconfirm --needed flameshot
 
-sudo pacman -S --noconfirm --needed xrandr
-sudo pacman -S --noconfirm --needed neofetch
+# screenshot
+# sudo pacman -S --noconfirm --needed flameshot
+
+# sudo pacman -S --noconfirm --needed xrandr
 
 ## Download packages from AUR
-sudo yay -S --noconfirm --needed ungoogled-chromium-bin
-sudo yay -S --noconfirm --needed ttf-firacode-nerd
+# sudo yay -S --noconfirm --needed ungoogled-chromium-bin
+# Manjaro only
+#sudo yay -S --noconfirm --needed ttf-firacode-nerd
 # powerfull for directory navigation
-sudo yay -S --noconfirm --needed broot
-sudo yay -S --noconfirm --needed topgrade
+
+# Install nerd-fonts
+mkdir ~/__tmp__
+cd ~/__tmp__
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/FiraCode.zip
+unzip FiraCode.zip
+mv __tmp__/*.ttf ~/.local/share/fonts/
+rm FiraCode.zip
+cd ~/
+rm -rf ~/__tmp__
+fc-cache -fv
+
+# ======= CARGO INSTALL ======= #
+cargo install broot topgrade
 
 # set fish as default shell
 chsh -s /usr/bin/fish
+
 # install oh-my-fish
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
-git clone https://github.com/lluz55/linux_custom.git
+# git clone https://github.com/lluz55/linux_custom.git
