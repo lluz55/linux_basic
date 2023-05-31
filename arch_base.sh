@@ -20,7 +20,6 @@ sudo pacman -S --noconfirm --needed neovim \
 	rust \
 	cargo \
 	rust-src \
-	autotiling \
 	fontconfig
 
 sleep 1
@@ -37,12 +36,12 @@ sleep 1
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
-makepkg -si
+makepkg -si --noconfirm
 cd ~/
 
 sleep 1
 
-yay -Sy autotiling
+yay --answerdiff None --answerclean None -- removemake -S autotiling
 # (de)compression tool
 # sudo pacman -S --noconfirm --needed ouch
 
